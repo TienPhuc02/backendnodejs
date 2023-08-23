@@ -9,7 +9,7 @@ const hostname = process.env.HOST_NAME || "localhost";
 configViewEngine(app);
 
 //khai bap routes
-app.use("/v1", webRoutes); // tat ca routes khai bao trong web.js thi dung sau tien to  "/v1", thuong thi tien to la v1 v2 the hien cho version1 version2
+app.use("/", webRoutes); // tat ca routes khai bao trong web.js thi dung sau tien to  "/v1", thuong thi tien to la v1 v2 the hien cho version1 version2
 
 //chay server
 app.listen(port, hostname, () => {
