@@ -9,6 +9,9 @@ const hostname = process.env.HOST_NAME || "localhost";
 app.set("views", path.join(__dirname, "views")); // khai bao noi luu tru file engine
 app.set("view engine", "ejs");
 
+//config static file
+app.use(express.static(path.join(__dirname, "public")));
+
 //khai bao routes
 app.get("/", (req, res) => {
   res.send("Hello World !");
