@@ -1,11 +1,13 @@
 const express = require("express"); //commonjs
 // import express from "express"; //es modules
 const path = require("path");
+require("dotenv").config();
 const app = express(); //app express
-const port = 8080; //port
-
+const port = process.env.PORT || 8080; //port
+console.log("🚀 ~ file: server.js:7 ~ port:", port);
+const hostname = process.env.HOST_NAME || "localhost";
 //config template engine
-app.set("views", path.join(__dirname, "views"));// khai bao noi luu tru file engine
+app.set("views", path.join(__dirname, "views")); // khai bao noi luu tru file engine
 app.set("view engine", "ejs");
 
 //khai bao routes
@@ -22,6 +24,6 @@ app.get("/phuc", (req, res) => {
 });
 
 //chay server
-app.listen(port, () => {
+app.listen(port, hostname, () => {
   console.log(`Example app listening on port ${port}`);
 });
