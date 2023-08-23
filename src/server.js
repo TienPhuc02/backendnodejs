@@ -5,10 +5,12 @@ const webRoutes = require("./routes/web");
 const mysql = require("mysql2");
 const connection = require("./config/database");
 const app = express(); //app express
-connection.query("select * from Users u ", function (err, results, fields) {
-  console.log("🚀 ~ file: server.js:16 ~ fields:", fields); // results contains rows returned by server
-  console.log("🚀 ~ file: server.js:16 ~ results:", results); // fields contains extra meta data about results, if available
-});
+
+// //simple query
+// connection.query("select * from Users u ", function (err, results, fields) {
+//   console.log("🚀 ~ file: server.js:16 ~ fields:", fields); // results contains rows returned by server
+//   console.log("🚀 ~ file: server.js:16 ~ results:", results); // fields contains extra meta data about results, if available
+// });
 //select * from Users u là gọi tất cả data trong database
 const port = process.env.PORT || 8080; //port
 const hostname = process.env.HOST_NAME || "localhost";
