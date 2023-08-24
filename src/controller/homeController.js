@@ -8,15 +8,11 @@ const getHomePage = async (req, res) => {
   // [object,Object] -> JSON.stringify(listUSers)
 };
 // mỗi 1 lần cần data dưới database thì tạo mới 1 connection
-const getABC = (req, res) => {
-  res.send("check abc phuc!");
-};
 const getCreateUser = (req, res) => {
   res.render("create-user.ejs");
 };
-const getPhuc = (req, res) => {
-  // res.send("<h1>check phuc!</h1>");
-  res.render("sample.ejs"); // render file sample -> tao ra 1 view động
+const getUpdateUser = (req, res) => {
+  res.render("update.ejs");
 };
 const postCreateUser = async (req, res) => {
   let data = req.body;
@@ -54,8 +50,7 @@ const postCreateUser = async (req, res) => {
 };
 module.exports = {
   getHomePage,
-  getABC,
-  getPhuc,
   postCreateUser,
   getCreateUser,
+  getUpdateUser,
 };

@@ -81,6 +81,10 @@ th {
 tr {
   border-bottom: 1px solid #ddd;
 }
+tr:hover {
+  background-color: #c5c5c5;
+  cursor: pointer;
+}
 .create-title {
   text-align: center;
   padding: 20px;
