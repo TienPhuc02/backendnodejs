@@ -1,16 +1,11 @@
 const connection = require("../config/database");
-const getHomePage = (req, res) => {
+const { getAllUsers } = require("../services/CRUDServices");
+const getHomePage = async (req, res) => {
   //   //process data -> call model
   //   //simple query
-  //   let users = [];
-  //  connection.query("select * from Users u ", function (err, results, fields) {
-  //     users = results;
-  //     console.log("🚀 ~ file: homeController.js:7 ~ results:", results);
-  //     console.log("🚀 ~ file: homeController.js:6 ~ getHomePage ~ users:", users);
-  //     res.send(JSON.stringify(users));
-  //   });
-
-  return res.render("home.ejs");
+  let results = await getAllUsers();
+  return res.render("home.ejs", { listUsers: results });
+  // [object,Object] -> JSON.stringify(listUSers)
 };
 // mỗi 1 lần cần data dưới database thì tạo mới 1 connection
 const getABC = (req, res) => {
@@ -49,7 +44,7 @@ const postCreateUser = async (req, res) => {
     "🚀 ~ file: homeController.js:48 ~ postCreateUser ~ results:",
     results
   );
-  res.send("create user success")
+  res.send("create user success");
   //connection simple
   // const [results, fields] = await connection.query("select * from Users u "); //promise
   // connection.query("select * from Users u ", function (err, results, fields) {
