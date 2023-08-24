@@ -21,7 +21,21 @@ const getPhuc = (req, res) => {
   res.render("sample.ejs"); // render file sample -> tao ra 1 view động
 };
 const postCreateUser = (req, res) => {
-  console.log(req.body);
-  res.send("Create a new user");
+  let data = req.body;
+  let { email, name, city } = data;
+  connection.query(
+    `INSERT INTO Users (email, name, city) 
+    VALUES (?,?,?)`,
+    [email, name, city],
+    function (err, results, fields) {
+      if (err) {
+        console.error(err);
+        res.status(500).send("An error occurred");
+      } else {
+        console.log(results);
+        res.send("create user success");
+      }
+    }
+  );
 };
 module.exports = { getHomePage, getABC, getPhuc, postCreateUser };
