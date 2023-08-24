@@ -12,6 +12,11 @@ const getCreateUser = (req, res) => {
   res.render("create-user.ejs");
 };
 const getUpdateUser = (req, res) => {
+  const userId = req.params.id;
+  console.log(
+    "🚀 ~ file: homeController.js:16 ~ getUpdateUser ~ userId:",
+    userId
+  );
   res.render("update.ejs");
 };
 const postCreateUser = async (req, res) => {
