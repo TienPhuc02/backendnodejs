@@ -69,3 +69,20 @@ body {
   margin: 0 auto;
   padding-top: 100px;
 }
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+td,
+th {
+  text-align: center;
+  padding: 10px;
+}
+tr {
+  border-bottom: 1px solid #ddd;
+}
+.create-title {
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+}
