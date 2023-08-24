@@ -11,6 +11,14 @@
       <form action="/update-user" method="POST">
         <fieldset>
           <legend>Update new user:</legend>
+          <label class="d-none" for="id">Id: </label>
+          <input
+            class="d-none"
+            value="<%= userUpdate.id %>"
+            type="text"
+            id="id"
+            name="id"
+          /><br /><br />
           <label for="email">Email: </label>
           <input
             value="<%= userUpdate.email %>"

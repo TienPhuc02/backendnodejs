@@ -1,5 +1,9 @@
 const connection = require("../config/database");
-const { getAllUsers, updateUser } = require("../services/CRUDServices");
+const {
+  getAllUsers,
+  updateUser,
+  updateUserById,
+} = require("../services/CRUDServices");
 const getHomePage = async (req, res) => {
   //   //process data -> call model
   //   //simple query
@@ -14,6 +18,12 @@ const getUpdateUser = async (req, res) => {
   const user = await updateUser(userId);
   res.render("update.ejs", { userUpdate: user });
 };
+const postUpdateUser = async (req, res) => {
+  let data = req.body;
+  let { email, name, city, id } = data;
+  await updateUserById(email, name, city, id);
+  res.redirect("/");
+};
 const postCreateUser = async (req, res) => {
   let data = req.body;
   let { email, name, city } = data;
@@ -22,15 +32,12 @@ const postCreateUser = async (req, res) => {
       VALUES (?,?,?)`,
     [email, name, city]
   );
-  console.log(
-    "🚀 ~ file: homeController.js:48 ~ postCreateUser ~ results:",
-    results
-  );
   res.send("create user success");
 };
 module.exports = {
   getHomePage,
   postCreateUser,
+  postUpdateUser,
   getCreateUser,
   getUpdateUser,
 };
