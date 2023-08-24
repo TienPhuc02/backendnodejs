@@ -20,4 +20,8 @@ const getPhuc = (req, res) => {
   // res.send("<h1>check phuc!</h1>");
   res.render("sample.ejs"); // render file sample -> tao ra 1 view động
 };
-module.exports = { getHomePage, getABC, getPhuc };
+const postCreateUser = (req, res) => {
+  console.log(req.body);
+  res.send("Create a new user");
+};
+module.exports = { getHomePage, getABC, getPhuc, postCreateUser };

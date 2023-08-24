@@ -13,8 +13,8 @@
       <a href="#contact">Contact</a>
       <a href="#about">About</a>
     </div>
-    <div class="form">
-      <form action="/action_page.php">
+    <div class="form-add-new-user">
+      <form action="/create-user" method="POST">
         <fieldset>
           <legend>Add new user:</legend>
           <label for="email">Email:</label>
@@ -23,9 +23,7 @@
           <input type="text" id="name" name="name" /><br /><br />
           <label for="city">City :</label>
           <input type="city" id="city" name="city" /><br /><br />
-          <div>
-            <button type="submit">Add new user</button>
-          </div>
+          <button>Add new user</button>
         </fieldset>
       </form>
     </div>

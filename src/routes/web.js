@@ -3,6 +3,7 @@ const {
   getHomePage,
   getABC,
   getPhuc,
+  postCreateUser,
 } = require("../controller/homeController");
 const router = express.Router();
 // nhung API ma phuc vu cho chuc nang cua web,method
@@ -12,4 +13,5 @@ router.get("/", getHomePage);
 //router.method(path,function)
 router.get("/abc", getABC);
 router.get("/phuc", getPhuc);
+router.post("/create-user", postCreateUser);
 module.exports = router;

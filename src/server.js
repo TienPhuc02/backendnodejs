@@ -14,6 +14,11 @@ const app = express(); //app express
 //select * from Users u là gọi tất cả data trong database
 const port = process.env.PORT || 8080; //port
 const hostname = process.env.HOST_NAME || "localhost";
+
+//config req.body
+app.use(express.json()); // Used to parse JSON bodies
+app.use(express.urlencoded()); //Parse URL-encoded bodies
+
 //config template engine
 configViewEngine(app);
 
