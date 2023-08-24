@@ -1,5 +1,5 @@
 const connection = require("../config/database");
-const { getAllUsers } = require("../services/CRUDServices");
+const { getAllUsers, updateUser } = require("../services/CRUDServices");
 const getHomePage = async (req, res) => {
   //   //process data -> call model
   //   //simple query
@@ -11,15 +11,7 @@ const getCreateUser = (req, res) => {
 };
 const getUpdateUser = async (req, res) => {
   const userId = req.params.id;
-  let [results, fields] = await connection.query(
-    "select * from Users where id = ?",
-    [userId]
-  );
-  console.log(
-    "🚀 ~ file: homeController.js:20 ~ getUpdateUser ~ results:",
-    results
-  );
-  let user = results && results.length > 0 ? results[0] : {};
+  const user = await updateUser(userId);
   res.render("update.ejs", { userUpdate: user });
 };
 const postCreateUser = async (req, res) => {
