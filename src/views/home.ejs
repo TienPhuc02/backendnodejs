@@ -12,7 +12,6 @@
       <a href="/create">Create User</a>
     </div>
     <div class="table">
-      <%= JSON.stringify(listUsers) %>
       <div class="create-title">List User</div>
       <table>
         <tr>
@@ -22,16 +21,18 @@
           <th>City</th>
           <th>Action</th>
         </tr>
+        <% JSON.parse(JSON.stringify(listUsers)).map((elem) => { %>
         <tr>
-          <td>Peter</td>
-          <td>Griffin</td>
-          <td>$100</td>
-          <td>$100</td>
+          <td><%= elem.id %></td>
+          <td><%= elem.name %></td>
+          <td><%= elem.email %></td>
+          <td><%= elem.city %></td>
           <td>
             <button>delete</button>
             <button>update</button>
           </td>
         </tr>
+        <% }); %>
       </table>
     </div>
   </body>
