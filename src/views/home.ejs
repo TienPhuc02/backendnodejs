@@ -28,7 +28,9 @@
           <td><%= elem.email %></td>
           <td><%= elem.city %></td>
           <td>
-            <button>delete</button>
+            <form action="/delete-user/<%= elem.id %>" method="POST">
+              <button>delete</button>
+            </form>
             <button><a href="/update/<%= elem.id %>">update</a></button>
           </td>
         </tr>
