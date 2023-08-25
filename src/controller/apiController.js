@@ -31,4 +31,17 @@ const putUpdateUserApi = async (req, res) => {
     data: results,
   });
 };
-module.exports = { getUsersApi, postCreateUserApi, putUpdateUserApi };
+const deleteUpdateUserApi = async (req, res) => {
+  const id = req.body._id;
+  await User.findByIdAndDelete(id);
+  return res.status(200).json({
+    errorCode: 0,
+    message: "user deleted",
+  });
+};
+module.exports = {
+  getUsersApi,
+  postCreateUserApi,
+  putUpdateUserApi,
+  deleteUpdateUserApi,
+};
