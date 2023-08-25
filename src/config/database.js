@@ -23,5 +23,5 @@ const connection = async () => {
 };
 module.exports = connection;
 //phuc235 là tên database
-//kittens là collection
+
 // bản ghi trong collection gọi là document
