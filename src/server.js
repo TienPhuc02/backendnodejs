@@ -4,7 +4,7 @@ const configViewEngine = require("./config/viewEngine");
 const webRoutes = require("./routes/web");
 const mysql = require("mysql2");
 const connection = require("./config/database");
-const { default: mongoose } = require("mongoose");
+const Kitten = require("./model/Kitten");
 const app = express(); //app express
 
 const port = process.env.PORT || 8080; //port
@@ -20,19 +20,10 @@ configViewEngine(app);
 //khai bap routes
 app.use("/", webRoutes); // tat ca routes khai bao trong web.js thi dung sau tien to  "/v1", thuong thi tien to la v1 v2 the hien cho version1 version2
 
+// clone đối tượng ứng với collection vừa tạo ở trên
+const cat = new Kitten({ name: "Phuc model" });
 
-// tao moi schema
-const kittySchema = new mongoose.Schema({
-  name: String,
-});
-
-// dinh nghia modal
-const Kitten = mongoose.model("Kitten", kittySchema);
-
-// tao moi object
-const cat = new Kitten({ name: "Phuc" });
-
-//ham luu
+// hàm lưu
 cat.save();
 
 //test  connection
