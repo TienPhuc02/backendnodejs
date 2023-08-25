@@ -38,22 +38,26 @@ const postUpdateUser = async (req, res) => {
 };
 const postDeleteUser = async (req, res) => {
   const userId = req.params.id;
-  console.log(
-    "🚀 ~ file: homeController.js:35 ~ postDeleteUser ~ userId:",
-    userId
-  );
-  const userDelete = await getDeleteUserById(userId);
+  // const userDelete = await getDeleteUserById(userId);
+  const userDelete = await User.findById(userId).exec();
   res.render("delete-user.ejs", { userDelete: userDelete });
 };
 const postDeleteUserId = async (req, res) => {
-  const id = req.body.id;
-  console.log("🚀 ~ file: homeController.js:45 ~ postDeleteUserId ~ id:", id);
-  // await postDeleteUserById(id);
-  const [results, fields] = await connection.query(
-    "DELETE FROM Users WHERE id = ?",
-    [id]
-  );
-  res.redirect("/");
+  const id = req.body._id;
+
+  try {
+    const deletedUser = await User.findByIdAndDelete(id);
+    if (deletedUser) {
+      console.log("Người dùng đã bị xóa:", deletedUser);
+      res.redirect("/");
+    } else {
+      console.log("Không tìm thấy người dùng.");
+      res.redirect("/");
+    }
+  } catch (error) {
+    console.error("Lỗi khi xóa người dùng:", error);
+    res.redirect("/");
+  }
 };
 
 module.exports = {
