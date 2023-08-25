@@ -14,9 +14,21 @@ const postCreateUserApi = async (req, res) => {
     name: name,
     city: city,
   });
-  return res.status(201).json({
+  return res.status(200).json({
     errorCode: 0,
     data: results,
   });
 };
-module.exports = { getUsersApi, postCreateUserApi };
+const putUpdateUserApi = async (req, res) => {
+  let data = req.body;
+  let { email, name, city, _id } = data;
+  const results = await User.updateOne(
+    { _id: _id },
+    { email: email, name: name, city: city }
+  );
+  return res.status(200).json({
+    errorCode: 0,
+    data: results,
+  });
+};
+module.exports = { getUsersApi, postCreateUserApi, putUpdateUserApi };
