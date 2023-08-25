@@ -20,8 +20,14 @@ configViewEngine(app);
 app.use("/", webRoutes); // tat ca routes khai bao trong web.js thi dung sau tien to  "/v1", thuong thi tien to la v1 v2 the hien cho version1 version2
 
 //test  connection
-connection();
+(async () => {
+  try {
+    await connection();
+    app.listen(port, hostname, () => {
+      console.log(`Backend app listening on port ${port}`);
+    });
+  } catch (err) {
+    console.log("Error connect to db", err);
+  }
+})();
 //chay server
-app.listen(port, hostname, () => {
-  console.log(`Example app listening on port ${port}`);
-});
