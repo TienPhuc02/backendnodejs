@@ -2,9 +2,9 @@ const connection = require("../config/database");
 const {
   getAllUsers,
   updateUser,
+  createNewUser,
   updateUserById,
   getDeleteUserById,
-  postDeleteUserById,
 } = require("../services/CRUDServices");
 const getHomePage = async (req, res) => {
   let results = await getAllUsers();
@@ -47,7 +47,7 @@ const postDeleteUserId = async (req, res) => {
     "DELETE FROM Users WHERE id = ?",
     [id]
   );
-  res.send(" deleted user");
+  res.redirect("/");
 };
 
 module.exports = {
