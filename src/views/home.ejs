@@ -23,15 +23,15 @@
         </tr>
         <% JSON.parse(JSON.stringify(listUsers)).map((elem) => { %>
         <tr>
-          <td><%= elem.id %></td>
+          <td><%= elem._id %></td>
           <td><%= elem.name %></td>
           <td><%= elem.email %></td>
           <td><%= elem.city %></td>
           <td>
-            <form action="/delete-user/<%= elem.id %>" method="POST">
+            <form action="/delete-user/<%= elem._id %>" method="POST">
               <button>delete</button>
             </form>
-            <button><a href="/update/<%= elem.id %>">update</a></button>
+            <button><a href="/update/<%= elem._id %>">update</a></button>
           </td>
         </tr>
         <% }); %>

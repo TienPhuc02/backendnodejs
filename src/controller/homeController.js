@@ -8,7 +8,7 @@ const {
 } = require("../services/CRUDServices");
 const User = require("../model/Users");
 const getHomePage = async (req, res) => {
-  let results = [];
+  let results = await User.find({});
   return res.render("home.ejs", { listUsers: results });
 };
 const getCreateUser = (req, res) => {
@@ -26,13 +26,14 @@ const postCreateUser = async (req, res) => {
 };
 const getUpdateUser = async (req, res) => {
   const userId = req.params.id;
-  const user = await updateUser(userId);
+  // const user = await updateUser(userId);
+  const user = await User.findById(userId).exec();
   res.render("update.ejs", { userUpdate: user });
 };
 const postUpdateUser = async (req, res) => {
   let data = req.body;
-  let { email, name, city, id } = data;
-  await updateUserById(email, name, city, id);
+  let { email, name, city, _id } = data;
+  await User.updateOne({ _id: _id }, { email: email, name: name, city: city });
   res.redirect("/");
 };
 const postDeleteUser = async (req, res) => {
