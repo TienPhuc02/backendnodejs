@@ -41,20 +41,19 @@ const deleteUpdateUserApi = async (req, res) => {
   });
 };
 const postUploadSingleFile = async (req, res) => {
-  console.log(
-    "🚀 ~ file: apiController.js:43 ~ postUploadSingleFile ~ res:",
-    req.files
-  );
+  // console.log(
+  //   "🚀 ~ file: apiController.js:43 ~ postUploadSingleFile ~ res:",
+  //   req.files
+  // );
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send("không tìm thấy file upload");
   } else {
     let results = await uploadSingleFile(req.files.image);
-    console.log(
-      "🚀 ~ file: apiController.js:52 ~ postUploadSingleFile ~ results:",
-      results
-    );
+    return res.status(200).json({
+      errorCode: 0,
+      data: results,
+    });
   }
-  return res.send("ok single");
 };
 module.exports = {
   getUsersApi,
