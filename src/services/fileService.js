@@ -48,11 +48,55 @@ const uploadSingleFile = async (fileObject) => {
     };
   } catch (err) {
     return {
-      status: "success",
-      path: "link-image",
+      status: "fail",
+      path: null,
       error: JSON.stringify(err),
     };
   }
 };
-const uploadMultipleFiles = () => {};
-module.exports = { uploadSingleFile };
+const uploadMultipleFiles = async (fileArray) => {
+  let uploadPath = path.resolve(__dirname, "../public/images/upload");
+  const resultsArr = [];
+  let countSuccess = 0;
+  for (let i = 0; i < fileArray.length; i++) {
+    console.log(i);
+    let extName = path.extname(fileArray[i].name);
+    console.log(
+      "🚀 ~ file: fileService.js:12 ~ uploadSingleFile ~ extName:",
+      extName
+    );
+
+    //get image'name extension
+    let baseName = path.basename(fileArray[i].name, extName);
+    console.log(
+      "🚀 ~ file: fileService.js:16 ~ uploadSingleFile ~ baseName:",
+      baseName
+    );
+
+    //create final path: eg: /upload/your-image.png
+    let finalName = `${baseName}-${Date.now()}${extName}`;
+    let finalPath = `${uploadPath}/${finalName}`;
+    try {
+      await fileArray[i].mv(finalPath);
+      resultsArr.push({
+        status: "success",
+        path: finalName, // dùng finalName để lưu vào trong data,clinet dùng finalName để hiển thị ảnh
+        fileName: fileArray[i].name,
+        error: null,
+      });
+      countSuccess++;
+    } catch (err) {
+      resultsArr.push({
+        status: "fail",
+        path: null, // dùng finalName để lưu vào trong data,clinet dùng finalName để hiển thị ảnh
+        fileName: fileArray[i].name,
+        error: JSON.stringify(err),
+      });
+    }
+  }
+  return {
+    countSuccess: countSuccess,
+    detail: resultsArr,
+  };
+};
+module.exports = { uploadSingleFile, uploadMultipleFiles };

@@ -1,11 +1,4 @@
 const connection = require("../config/database");
-// const {
-//   getAllUsers,
-//   updateUser,
-//   createNewUser,
-//   updateUserById,
-//   getDeleteUserById,
-// } = require("../services/CRUDServices");
 const User = require("../model/Users");
 const getHomePage = async (req, res) => {
   let results = await User.find({});
@@ -48,10 +41,10 @@ const postDeleteUserId = async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(id);
     if (deletedUser) {
-      // console.log("Người dùng đã bị xóa:", deletedUser);
+      console.log("Người dùng đã bị xóa:", deletedUser);
       res.redirect("/");
     } else {
-      // console.log("Không tìm thấy người dùng.");
+      console.log("Không tìm thấy người dùng.");
       res.redirect("/");
     }
   } catch (error) {

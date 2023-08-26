@@ -5,6 +5,7 @@ const {
   putUpdateUserApi,
   deleteUpdateUserApi,
   postUploadSingleFile,
+  postUploadMultipleFile
 } = require("../controller/apiController");
 const routerAPI = express.Router();
 routerAPI.get("/", (req, res) => {
@@ -15,4 +16,5 @@ routerAPI.post("/users", postCreateUserApi);
 routerAPI.put("/users", putUpdateUserApi);
 routerAPI.delete("/users", deleteUpdateUserApi);
 routerAPI.post("/file", postUploadSingleFile);
+routerAPI.post("/files", postUploadMultipleFile);
 module.exports = routerAPI;
