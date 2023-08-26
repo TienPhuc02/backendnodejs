@@ -5,11 +5,14 @@ const webRoutes = require("./routes/web");
 const apiRoutes = require("./routes/api");
 const mysql = require("mysql2");
 const connection = require("./config/database");
-
+const fileUpload = require("express-fileupload");
 const app = express(); //app express
 
 const port = process.env.PORT || 8080; //port
 const hostname = process.env.HOST_NAME || "localhost";
+
+// default options
+app.use(fileUpload());
 
 //config req.body
 app.use(express.json()); // Used to parse JSON bodies
@@ -34,3 +37,5 @@ app.use("/v1/api/", apiRoutes);
   }
 })();
 //chay server
+
+//view -> router ->req.files -> controller -> service(model)->view

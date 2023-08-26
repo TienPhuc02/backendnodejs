@@ -1,4 +1,5 @@
 const User = require("../model/Users");
+const { uploadSingleFile } = require("../services/fileService");
 const getUsersApi = async (req, res) => {
   let results = await User.find({});
   return res.status(200).json({
@@ -39,9 +40,26 @@ const deleteUpdateUserApi = async (req, res) => {
     message: "user deleted",
   });
 };
+const postUploadSingleFile = async (req, res) => {
+  console.log(
+    "🚀 ~ file: apiController.js:43 ~ postUploadSingleFile ~ res:",
+    req.files
+  );
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return res.status(400).send("không tìm thấy file upload");
+  } else {
+    let results = await uploadSingleFile(req.files.image);
+    console.log(
+      "🚀 ~ file: apiController.js:52 ~ postUploadSingleFile ~ results:",
+      results
+    );
+  }
+  return res.send("ok single");
+};
 module.exports = {
   getUsersApi,
   postCreateUserApi,
   putUpdateUserApi,
   deleteUpdateUserApi,
+  postUploadSingleFile,
 };
