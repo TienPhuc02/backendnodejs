@@ -2,7 +2,8 @@ const express = require("express"); //commonjs
 require("dotenv").config();
 const configViewEngine = require("./config/viewEngine");
 const webRoutes = require("./routes/web");
-const apiRoutes = require("./routes/api");
+const apiUserRoutes = require("./routes/apiUser");
+const apiCustomerRoutes = require("./routes/apiCustomer");
 const mysql = require("mysql2");
 const connection = require("./config/database");
 const fileUpload = require("express-fileupload");
@@ -23,7 +24,8 @@ configViewEngine(app);
 
 //khai bap routes
 app.use("/", webRoutes);
-app.use("/v1/api/", apiRoutes);
+app.use("/v1/api/", apiUserRoutes);
+app.use("/v1/api/", apiCustomerRoutes);
 
 //test  connection
 (async () => {
