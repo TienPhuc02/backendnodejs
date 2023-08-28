@@ -5,6 +5,7 @@ const {
 const {
   createCustomerService,
   createListCustomerService,
+  getListAllCustomers,
 } = require("../services/customerService.js");
 const postUploadSingleFile = async (req, res) => {
   // console.log(
@@ -77,9 +78,21 @@ const postCreateListCustomerApi = async (req, res) => {
   //bulk insert, batch insert
   //https://mongoosejs.com/docs/api/model.html#Model.insertMany()
 };
+const getAllListCustomersApi = async (req, res) => {
+  const data = await getListAllCustomers();
+  console.log(
+    "🚀 ~ file: customerController.js:83 ~ getAllCustomers ~ data:",
+    data
+  );
+  res.status(200).json({
+    EC: 0,
+    data: data,
+  });
+};
 module.exports = {
   postUploadMultipleFile,
   postUploadSingleFile,
   postCreateCustomerApi,
   postCreateListCustomerApi,
+  getAllListCustomersApi,
 };
