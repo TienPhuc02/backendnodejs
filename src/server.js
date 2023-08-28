@@ -43,7 +43,14 @@ app.use("/v1/api/", apiCustomerRoutes);
     await client.connect();
     console.log("Connected successfully to server");
     const db = client.db(dbName);
-    const collection = db.collection("documents");
+    const collection = db.collection("customers");
+    // collection.insertOne({ name: "TienPhuc" });
+    // collection.insertOne({ email: "dtp235@gmail.com", address: "ha noi" });
+    // collection.insertOne({ test: [1, 2, 3, 4] });
+    //monggodb nó không bị ép bởi hình thù cố định của model
+    //mongoose chặt chẽ,validate hơn khi lưu data xuống mongodb
+    let a = await collection.findOne({ address: "ha noi" });
+    console.log(a);
     app.listen(port, hostname, () => {
       console.log(`Backend app listening on port ${port}`);
     });
