@@ -23,5 +23,11 @@ routerAPI.get("/info", (req, res) => {
     data: req.query,
   });
 }); // + -> space
+routerAPI.get("/info/:name/:address", (req, res) => {
+  console.log(req.params);
+  return res.status(200).json({
+    data: req.params,
+  });
+}); // + -> space
 routerAPI.delete("/list-customers", deleteListCustomersApi);
 module.exports = routerAPI;
