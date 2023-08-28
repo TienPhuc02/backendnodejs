@@ -29,7 +29,7 @@ const createListCustomerService = async (arr) => {
     return null;
   }
 };
-const getListAllCustomers = async () => {
+const getListAllCustomersService = async () => {
   try {
     const results = await Customers.find({});
     return results;
@@ -38,4 +38,52 @@ const getListAllCustomers = async () => {
     return null;
   }
 };
-module.exports = { createCustomerService, createListCustomerService,getListAllCustomers };
+const putUpdateCustomerService = async (id, name, email, address) => {
+  try {
+    const results = await Customers.findOneAndUpdate(
+      { _id: id },
+      { name: name, email: email, address: address },
+      { new: true }
+    );
+    console.log(
+      "🚀 ~ file: customerService.js:47 ~ putUpdateCustomerService ~ results:",
+      results
+    );
+    return results;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+const deleteCustomersApiService = async (id) => {
+  try {
+    const results = await Customers.deleteById({ _id: id });
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+const deleteListCustomersApiService = async (listId) => {
+  try {
+    if (listId.length > 0) {
+      for (let i = 0; i < listId.length; i++) {
+        const results = await Customers.deleteById({ _id: listId[i] });
+        return results;
+      }
+    } else { //xoa 1 customer
+      const results = await Customers.deleteById({ _id: listId });
+      return results;
+    }
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+module.exports = {
+  createCustomerService,
+  createListCustomerService,
+  getListAllCustomersService,
+  putUpdateCustomerService,
+  deleteCustomersApiService,
+  deleteListCustomersApiService,
+};

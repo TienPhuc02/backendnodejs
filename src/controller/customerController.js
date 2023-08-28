@@ -5,7 +5,10 @@ const {
 const {
   createCustomerService,
   createListCustomerService,
-  getListAllCustomers,
+  getListAllCustomersService,
+  putUpdateCustomerService,
+  deleteCustomersApiService,
+  deleteListCustomersApiService,
 } = require("../services/customerService.js");
 const postUploadSingleFile = async (req, res) => {
   // console.log(
@@ -79,7 +82,7 @@ const postCreateListCustomerApi = async (req, res) => {
   //https://mongoosejs.com/docs/api/model.html#Model.insertMany()
 };
 const getAllListCustomersApi = async (req, res) => {
-  const data = await getListAllCustomers();
+  const data = await getListAllCustomersService();
   console.log(
     "🚀 ~ file: customerController.js:83 ~ getAllCustomers ~ data:",
     data
@@ -89,10 +92,48 @@ const getAllListCustomersApi = async (req, res) => {
     data: data,
   });
 };
+const putUpdateCustomerApi = async (req, res) => {
+  const { id, name, email, address } = req.body;
+
+  // res.send("updated customers");
+  const data = await putUpdateCustomerService(id, name, email, address);
+  res.status(200).json({
+    EC: 0,
+    data: data,
+  });
+};
+const deleteCustomerApi = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const data = await deleteCustomersApiService(id);
+    res.status(200).json({
+      EC: 0,
+      data: data,
+    });
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+const deleteListCustomersApi = async (req, res) => {
+  const listId = req.body.idArray;
+  try {
+    const data = await deleteListCustomersApiService(listId);
+    res.status(200).json({
+      EC: 0,
+      data: data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 module.exports = {
   postUploadMultipleFile,
   postUploadSingleFile,
   postCreateCustomerApi,
   postCreateListCustomerApi,
   getAllListCustomersApi,
+  putUpdateCustomerApi,
+  deleteCustomerApi,
+  deleteListCustomersApi,
 };
