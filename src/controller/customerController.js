@@ -2,6 +2,7 @@ const {
   uploadSingleFile,
   uploadMultipleFiles,
 } = require("../services/fileService.js");
+const aqp = require("api-query-params");
 const {
   createCustomerService,
   createListCustomerService,
@@ -82,10 +83,17 @@ const postCreateListCustomerApi = async (req, res) => {
   //https://mongoosejs.com/docs/api/model.html#Model.insertMany()
 };
 const getAllListCustomersApi = async (req, res) => {
-  const data = await getListAllCustomersService();
-  console.log(
-    "🚀 ~ file: customerController.js:83 ~ getAllCustomers ~ data:",
-    data
+  console.log(req.query);
+
+  const currentPage = req.query.page;
+  const itemsPerPage = req.query.limit;
+  // const name = req.query.name;
+  const results = null;
+  const data = await getListAllCustomersService(
+    currentPage,
+    itemsPerPage,
+    // name,
+    req.query
   );
   res.status(200).json({
     EC: 0,
@@ -94,8 +102,6 @@ const getAllListCustomersApi = async (req, res) => {
 };
 const putUpdateCustomerApi = async (req, res) => {
   const { id, name, email, address } = req.body;
-
-  // res.send("updated customers");
   const data = await putUpdateCustomerService(id, name, email, address);
   res.status(200).json({
     EC: 0,

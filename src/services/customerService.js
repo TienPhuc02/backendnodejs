@@ -1,4 +1,5 @@
 const Customers = require("../model/Customers");
+const aqp = require("api-query-params");
 const createCustomerService = async (
   name,
   address,
@@ -29,9 +30,27 @@ const createListCustomerService = async (arr) => {
     return null;
   }
 };
-const getListAllCustomersService = async () => {
+const getListAllCustomersService = async (
+  currentPage,
+  itemsPerPage,
+  // name,
+  queryString
+) => {
   try {
-    const results = await Customers.find({});
+    let results = null;
+    if (currentPage && itemsPerPage) {
+      let offSet = (currentPage - 1) * itemsPerPage;
+      const { filter } = aqp(queryString);
+      console.log("🚀 ~ file: customerService.js:44 ~ filter:", filter);
+      delete filter.page;
+      results = await Customers.find(filter)
+        .skip(offSet)
+        .sort({ _id: 1 })
+        .limit(itemsPerPage)
+        .exec();
+    } else {
+      results = await Customers.find({});
+    }
     return results;
   } catch (err) {
     console.log(err);
@@ -70,7 +89,8 @@ const deleteListCustomersApiService = async (listId) => {
         const results = await Customers.deleteById({ _id: listId[i] });
         return results;
       }
-    } else { //xoa 1 customer
+    } else {
+      //xoa 1 customer
       const results = await Customers.deleteById({ _id: listId });
       return results;
     }
