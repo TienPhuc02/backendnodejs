@@ -1,6 +1,5 @@
 const express = require("express"); //commonjs
 require("dotenv").config();
-const { MongoClient } = require("mongodb");
 const configViewEngine = require("./config/viewEngine");
 const webRoutes = require("./routes/web");
 const apiUserRoutes = require("./routes/apiUser");
@@ -31,26 +30,7 @@ app.use("/v1/api/", apiCustomerRoutes);
 (async () => {
   try {
     //using mongoose
-    // await connection();
-
-    //using mongodb driver
-    // Connection URL
-    const url = process.env.DB_HOST_WITH_DRIVER;
-    const client = new MongoClient(url);
-
-    // Database Name
-    const dbName = process.env.DB_NAME;
-    await client.connect();
-    console.log("Connected successfully to server");
-    const db = client.db(dbName);
-    const collection = db.collection("customers");
-    // collection.insertOne({ name: "TienPhuc" });
-    // collection.insertOne({ email: "dtp235@gmail.com", address: "ha noi" });
-    // collection.insertOne({ test: [1, 2, 3, 4] });
-    //monggodb nó không bị ép bởi hình thù cố định của model
-    //mongoose chặt chẽ,validate hơn khi lưu data xuống mongodb
-    let a = await collection.findOne({ address: "ha noi" });
-    console.log(a);
+    await connection();
     app.listen(port, hostname, () => {
       console.log(`Backend app listening on port ${port}`);
     });

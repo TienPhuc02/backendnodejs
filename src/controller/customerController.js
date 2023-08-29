@@ -50,6 +50,7 @@ const postUploadMultipleFile = async (req, res) => {
 };
 const postCreateCustomerApi = async (req, res) => {
   let { name, address, phone, email, description } = req.body;
+  console.log(req.body);
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send("không tìm thấy file upload");
   } else {
